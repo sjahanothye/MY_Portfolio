@@ -232,37 +232,6 @@ export const projectsData = [
     ]
   },
   {
-    id: "academic-pm",
-    name: "Academic Project Management & Collaboration Platform",
-    category: "Full-Stack Web App",
-    tagline: "Streamlining team coordination, milestone tracking, and supervisor submissions for university students.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80",
-    techStack: ["Python", "Django", "SQLite", "Bootstrap 5", "JavaScript"],
-    liveUrl: "https://github.com/sjahanothye",
-    clientRepo: "https://github.com/sjahanothye",
-    brief: "Full-stack academic platform built with Django's MVT architecture to facilitate student team collaboration, role-based project submission, and supervisor evaluation.",
-    description: `Developed to solve coordination bottlenecks in university group projects, this platform provides role-based authentication for students, group leaders, and faculty supervisors.
-    
-    It features structured milestone tracking, document and code submission repositories, interactive progress dashboards, and automated email alerts for upcoming academic deadlines.`,
-    features: [
-      "Role-based authentication (Faculty, Team Lead, Student)",
-      "Interactive dashboards with milestone progress tracking",
-      "Relational schema handling concurrent team allocations and task assignments",
-      "Secure file upload system for reports, presentations, and code deliverables",
-      "Built with Django ORM, server-side validation, and responsive Bootstrap views"
-    ],
-    challenges: [
-      "Designing complex normalized relational models in SQLite to manage multiple team tiers without data redundancy.",
-      "Implementing robust server-side validation and sanitization for diverse student file uploads.",
-      "Managing permission scopes so supervisors can only grade assigned batches."
-    ],
-    futurePlans: [
-      "Add real-time chat and discussion boards using Django Channels & WebSockets.",
-      "Integrate automated plagiarism scanning for submitted academic reports.",
-      "Deploy on cloud infrastructure with PostgreSQL and AWS S3 storage."
-    ]
-  },
-  {
     id: "earth-guardians",
     name: "Earth Guardians — Gamified Eco-Action Platform",
     category: "Gamified Web App",
