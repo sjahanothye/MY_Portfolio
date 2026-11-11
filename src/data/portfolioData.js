@@ -8,6 +8,7 @@ export const personalInfo = {
   location: "59/1, Subash Bosh Avenue, Luxmibazar, Dhaka, Bangladesh",
   github: "https://github.com/sjahanothye",
   linkedin: "https://www.linkedin.com/in/sumaya-jahan-othye",
+  vercel: "https://vercel.com/sjahanothye",
   avatar: "/profile.jpg",
   resumeUrl: "/CV_SUMAYA_JAHAN_OTHYE.pdf",
   bio: `Passionate and driven Computer Science & Engineering graduate from the University of Asia Pacific (Graduated: 2026) with a strong academic foundation (CGPA 3.48). I specialize in Full-Stack Web Development and AI/ML (Deep Learning and Computer Vision), combining analytical thinking with technical problem-solving to build modern, scalable, and user-friendly digital solutions. Through my undergraduate thesis on Deepfake Image Detection using TensorFlow, I gained hands-on expertise in implementing self-supervised learning and computer vision models. I am highly motivated to innovate, collaborate, and create intelligent software applications that solve real-world problems.`,
@@ -139,7 +140,8 @@ export const projectsData = [
     tagline: "Connecting communities across Bangladesh through organized medical camps, blood drives, and social welfare.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
     techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "JWT"],
-    liveUrl: "https://healthconnect-community.vercel.app",
+    liveUrl: "https://healthconnect-client.vercel.app",
+    deploymentPlatform: "Vercel",
     clientRepo: "https://github.com/sjahanothye/healthconnect-client",
     serverRepo: "https://github.com/sjahanothye/healthconnect-server",
     brief: "HealthConnect is a modern, community-driven event management platform designed to connect volunteers, licensed doctors, and local organizations across Bangladesh. Enables individuals to organize healthcare camps, donate blood, and participate in community health drives.",
@@ -172,6 +174,7 @@ export const projectsData = [
     image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Lucide Icons", "REST APIs"],
     liveUrl: "https://assignment07-drab.vercel.app",
+    deploymentPlatform: "Vercel",
     clientRepo: "https://github.com/sjahanothye/Assignment07",
     brief: "A modern, reliable web application tracking real-time Bangladeshi daily commodity prices (rice, lentils, cooking oil, vegetables, fish, meat, and spices) with market-wise comparison.",
     description: `বাজার দর (Bazar Dor) addresses the challenge of daily commodity price volatility in Bangladesh. It provides consumers, household planners, and retailers with transparent, accurate, and up-to-date daily market rates.
@@ -203,6 +206,7 @@ export const projectsData = [
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Canvas Confetti", "LocalStorage API"],
     liveUrl: "https://assignment06-wheat.vercel.app",
+    deploymentPlatform: "Vercel",
     clientRepo: "https://github.com/sjahanothye/Assignment06",
     brief: "A high-performance gym companion allowing athletes to build custom workout routines across 12 major lifts, track live sets & calories, and celebrate completions.",
     description: `FitLog is designed for athletes and gym-goers who want an uncluttered, high-contrast workout logger. Built with React and TypeScript, it allows users to browse an exercise database categorized by muscle group, assemble a personalized daily training split, and track their reps and weights in real-time.
@@ -286,6 +290,33 @@ export const projectsData = [
       "Re-engineer backend with Node.js/Express and MongoDB for higher scalability.",
       "Add geolocation-based local community cleanup meetups with map integration.",
       "Introduce school eco-club leaderboards for competitive inter-institution challenges."
+    ]
+  },
+  {
+    id: "devstack",
+    name: "DevStack — Interactive Tech Stack Builder",
+    category: "Web Application",
+    tagline: "Interactive developer tech stack builder with real-time feedback and slot architecture.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80",
+    techStack: ["React", "Vite", "Tailwind CSS", "JavaScript"],
+    liveUrl: "https://sjahanothye.github.io/Assignment05/",
+    clientRepo: "https://github.com/sjahanothye/Assignment05",
+    brief: "An interactive web app allowing software engineers to discover, organize, and assemble customized technology stacks with real-time feedback and smooth animations.",
+    description: `DevStack is an interactive, modern web application designed for developers and software engineers to discover, organize, and assemble their ideal software technology stacks with real-time feedback, smooth animations, and zero duplicate entries.
+    
+    Users can browse through frontend, backend, database, and devops categories, drag or select technologies into active slots, and preview their integrated tech blueprint.`,
+    features: [
+      "Dynamic category-wise technology selector with instant visual badges",
+      "Interactive stack assembler with duplicate prevention safeguards",
+      "Fast client-side build with Vite and responsive Tailwind design",
+      "One-click reset and summary view of assembled architecture"
+    ],
+    challenges: [
+      "Managing instant reactive state synchronization across chosen tech categories without redundant component re-renders."
+    ],
+    futurePlans: [
+      "Add exportable stack README badge generator.",
+      "Integrate community stack reviews and voting."
     ]
   }
 ];

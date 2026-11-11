@@ -51,6 +51,17 @@ export default function Footer() {
             </a>
 
             <a
+              href={personalInfo.vercel}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-500 transition-colors font-mono text-[11px] font-bold"
+              aria-label="Vercel"
+              title="Vercel Profile"
+            >
+              ▲
+            </a>
+
+            <a
               href={`mailto:${personalInfo.email}`}
               className="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-colors"
               aria-label="Email"

@@ -123,6 +123,17 @@ export default function Hero() {
             </a>
 
             <a
+              href={personalInfo.vercel}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1 font-mono text-xs font-bold"
+              aria-label="Vercel Deployments"
+              title="Vercel Profile"
+            >
+              ▲
+            </a>
+
+            <a
               href={`mailto:${personalInfo.email}`}
               className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1"
               aria-label="Email"

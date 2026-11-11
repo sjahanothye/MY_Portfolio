@@ -68,7 +68,9 @@ export default function ProjectModal({ project, onClose }) {
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-500/20 transition-all hover:scale-105"
               >
                 <ExternalLink className="w-4 h-4" />
-                <span>Visit Live Project</span>
+                <span>
+                  {project.deploymentPlatform === 'Vercel' ? '▲ Visit Live on Vercel' : 'Visit Live Project'}
+                </span>
               </a>
             )}
 
