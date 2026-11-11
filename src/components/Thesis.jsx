@@ -113,7 +113,7 @@ export default function Thesis() {
                 </div>
               </div>
 
-              {/* Action Buttons: Download PDF, Read Online & GitHub */}
+              {/* Action Buttons: Download PDF & GitHub */}
               <div className="pt-4 flex flex-wrap items-center gap-3">
                 {/* Download Thesis PDF */}
                 <a
@@ -125,27 +125,16 @@ export default function Thesis() {
                   <span>Download Thesis PDF (87 Pages)</span>
                 </a>
 
-                {/* View / Read Online */}
-                <a
-                  href={thesisData.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-medium text-xs border border-slate-700 transition-all hover:scale-105"
-                >
-                  <FileText className="w-4 h-4 text-purple-400" />
-                  <span>View PDF in Browser</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-
                 {/* GitHub Code */}
                 <a
                   href={thesisData.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-medium text-xs border border-slate-800 transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white font-medium text-xs border border-slate-700 transition-colors"
                 >
                   <Github className="w-4 h-4" />
-                  <span>Research Code (CSE-406)</span>
+                  <span>Research Repository (GitHub)</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
                 </a>
               </div>
 
@@ -153,26 +142,6 @@ export default function Thesis() {
 
             {/* Right 5 cols: Challenges & Future Scope Card */}
             <div className="lg:col-span-5 space-y-6">
-              
-              {/* PDF Preview Notice Card */}
-              <div className="p-6 rounded-2xl bg-purple-950/20 border border-purple-500/30 space-y-3">
-                <div className="flex items-center gap-2 text-purple-300 font-bold text-sm">
-                  <FileText className="w-4 h-4 shrink-0 text-purple-400" />
-                  <span>Complete Thesis Document Attached</span>
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  The complete 87-page undergraduate thesis manuscript, including detailed system architecture diagrams, mathematical formulations, Gantt charts, and CEP/CEA evaluation matrices, is available for review and download.
-                </p>
-                <a
-                  href={thesisData.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-semibold text-purple-400 hover:text-purple-300 transition-colors"
-                >
-                  <span>Open manuscript in full tab</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
 
               {/* Challenges Card */}
               <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3">
