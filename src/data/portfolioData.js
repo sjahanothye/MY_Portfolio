@@ -292,33 +292,6 @@ export const projectsData = [
       "Add geolocation-based local community cleanup meetups with map integration.",
       "Introduce school eco-club leaderboards for competitive inter-institution challenges."
     ]
-  },
-  {
-    id: "devstack",
-    name: "DevStack — Interactive Tech Stack Builder",
-    category: "Web Application",
-    tagline: "Interactive developer tech stack builder with real-time feedback and slot architecture.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1000&q=80",
-    techStack: ["React", "Vite", "Tailwind CSS", "JavaScript"],
-    liveUrl: "https://sjahanothye.github.io/Assignment05/",
-    clientRepo: "https://github.com/sjahanothye/Assignment05",
-    brief: "An interactive web app allowing software engineers to discover, organize, and assemble customized technology stacks with real-time feedback and smooth animations.",
-    description: `DevStack is an interactive, modern web application designed for developers and software engineers to discover, organize, and assemble their ideal software technology stacks with real-time feedback, smooth animations, and zero duplicate entries.
-    
-    Users can browse through frontend, backend, database, and devops categories, drag or select technologies into active slots, and preview their integrated tech blueprint.`,
-    features: [
-      "Dynamic category-wise technology selector with instant visual badges",
-      "Interactive stack assembler with duplicate prevention safeguards",
-      "Fast client-side build with Vite and responsive Tailwind design",
-      "One-click reset and summary view of assembled architecture"
-    ],
-    challenges: [
-      "Managing instant reactive state synchronization across chosen tech categories without redundant component re-renders."
-    ],
-    futurePlans: [
-      "Add exportable stack README badge generator.",
-      "Integrate community stack reviews and voting."
-    ]
   }
 ];
 
