@@ -5,6 +5,7 @@ import { personalInfo } from '../data/portfolioData';
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
+    phone: '',
     email: '',
     subject: '',
     message: ''
@@ -18,20 +19,27 @@ export default function Contact() {
     if (!formData.name || !formData.message) return;
     
     // Construct WhatsApp formatted message text
-    const text = `*New Message from Portfolio Visitor*
+    const text = `*New Direct Message from Portfolio*
 
-👤 *Name:* ${formData.name}
-📧 *Email:* ${formData.email || 'Not provided'}
+👤 *Sender Name:* ${formData.name}
+📱 *Sender Phone/WhatsApp:* ${formData.phone || 'Not provided'}
+📧 *Sender Email:* ${formData.email || 'Not provided'}
 📌 *Subject:* ${formData.subject || 'Portfolio Inquiry'}
 
 💬 *Message:*
 ${formData.message}`;
     
-    const cleanPhone = personalInfo.whatsapp.replace(/[^0-9]/g, '');
-    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
+    const cleanMyPhone = personalInfo.whatsapp.replace(/[^0-9]/g, '');
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanMyPhone}&text=${encodeURIComponent(text)}`;
     
     setLastWhatsAppUrl(whatsappUrl);
-    window.open(whatsappUrl, '_blank');
+
+    // Open WhatsApp immediately
+    const win = window.open(whatsappUrl, '_blank');
+    if (!win || win.closed || typeof win.closed === 'undefined') {
+      window.location.href = whatsappUrl;
+    }
+
     setSubmitted(true);
   };
 
@@ -158,19 +166,19 @@ ${formData.message}`;
             <div className="flex items-center gap-2 mb-2">
               <MessageSquare className="w-5 h-5 text-emerald-400" />
               <h3 className="text-xl font-bold text-white">
-                Send a Direct Message via WhatsApp
+                Send a Direct Message
               </h3>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm mb-6">
-              Write your message below. Clicking send will directly open WhatsApp with your message pre-formatted for instant delivery to <strong className="text-slate-200">{personalInfo.whatsapp}</strong>.
+              Fill in your details below. Clicking send will instantly deliver your message directly to Sumaya's WhatsApp (<strong className="text-emerald-400">{personalInfo.whatsapp}</strong>).
             </p>
 
             {submitted ? (
               <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-4 animate-fadeIn">
                 <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                <h4 className="text-lg font-bold text-white">WhatsApp Chat Opened!</h4>
+                <h4 className="text-lg font-bold text-white">WhatsApp Opened!</h4>
                 <p className="text-slate-300 text-sm max-w-md mx-auto">
-                  Your message has been formatted and WhatsApp has opened to deliver it directly to Sumaya.
+                  Your message has been formatted and WhatsApp has been launched to send it directly to Sumaya.
                 </p>
                 <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
                   {lastWhatsAppUrl && (
@@ -178,7 +186,7 @@ ${formData.message}`;
                       href={lastWhatsAppUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md"
                     >
                       <MessageSquare className="w-4 h-4" />
                       <span>Reopen WhatsApp Chat</span>
@@ -188,7 +196,7 @@ ${formData.message}`;
                   <button
                     onClick={() => {
                       setSubmitted(false);
-                      setFormData({ name: '', email: '', subject: '', message: '' });
+                      setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
                     }}
                     className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold uppercase tracking-wider transition-colors"
                   >
@@ -198,6 +206,8 @@ ${formData.message}`;
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                
+                {/* Row 1: Name and Phone Number */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
@@ -212,6 +222,24 @@ ${formData.message}`;
                       className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                     />
                   </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      Your Phone / WhatsApp Number *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      placeholder="+880 1XXXXXXXXX"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors font-mono"
+                    />
+                  </div>
+                </div>
+
+                {/* Row 2: Email and Subject */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
                       Your Email (Optional)
@@ -224,21 +252,22 @@ ${formData.message}`;
                       className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                     />
                   </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                      Subject / Topic
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      placeholder="Engineering Role / Project Opportunity"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                  </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                    Subject / Topic
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="Engineering Role / Project Discussion / Collaboration"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
-                  />
-                </div>
-
+                {/* Message */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
                     Your Message *
@@ -248,14 +277,15 @@ ${formData.message}`;
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Hello Sumaya, I came across your portfolio and would like to discuss..."
+                    placeholder="Hello Sumaya, I would like to connect regarding..."
                     className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                   />
                 </div>
 
+                {/* Submit button */}
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold text-sm rounded-xl shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold text-sm rounded-xl shadow-lg shadow-emerald-500/25 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Send Direct Message to WhatsApp</span>

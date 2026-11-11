@@ -139,29 +139,8 @@ export default function PersonalInfoModal({ isOpen, onClose }) {
           </div>
         </div>
 
-        {/* Quick Action Footer */}
-        <div className="flex items-center gap-3 pt-2">
-          <a
-            href={personalInfo.resumeUrl}
-            download="CV_SUMAYA_JAHAN_OTHYE.pdf"
-            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>Download CV</span>
-          </a>
-
-          <a
-            href={`https://wa.me/${personalInfo.whatsapp.replace(/[^0-9]/g, '')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold text-xs rounded-xl border border-slate-700 transition-colors"
-          >
-            <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
-            <span>WhatsApp</span>
-          </a>
-        </div>
-
       </div>
     </div>
   );
 }
+
