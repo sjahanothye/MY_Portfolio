@@ -2,6 +2,7 @@ export const personalInfo = {
   name: "Sumaya Jahan Othye",
   role: "Software Engineer | AI/ML Enthusiast",
   headline: "Specializing in Full-Stack Web Development, Computer Vision & Deep Learning",
+  bloodGroup: "A+ (Positive)",
   email: "sjahanothye1@gmail.com",
   phone: "+8801533419019",
   whatsapp: "+8801533419019",

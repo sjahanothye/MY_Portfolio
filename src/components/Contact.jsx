@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MessageSquare, MapPin, Send, CheckCircle2, Copy, Check } from 'lucide-react';
+import { Mail, Phone, MessageSquare, MapPin, Send, CheckCircle2, Copy, Check, ExternalLink } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Contact() {
@@ -11,19 +11,27 @@ export default function Contact() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [lastWhatsAppUrl, setLastWhatsAppUrl] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    if (!formData.name || !formData.message) return;
     
-    // Construct mailto link as fallback or direct action
-    const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
-      formData.subject || 'Portfolio Inquiry from ' + formData.name
-    )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )}`;
+    // Construct WhatsApp formatted message text
+    const text = `*New Message from Portfolio Visitor*
+
+👤 *Name:* ${formData.name}
+📧 *Email:* ${formData.email || 'Not provided'}
+📌 *Subject:* ${formData.subject || 'Portfolio Inquiry'}
+
+💬 *Message:*
+${formData.message}`;
     
-    window.open(mailtoUrl, '_blank');
+    const cleanPhone = personalInfo.whatsapp.replace(/[^0-9]/g, '');
+    const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`;
+    
+    setLastWhatsAppUrl(whatsappUrl);
+    window.open(whatsappUrl, '_blank');
     setSubmitted(true);
   };
 
@@ -47,7 +55,7 @@ export default function Contact() {
             Let's Build Something <span className="text-emerald-400">Exceptional Together</span>
           </h2>
           <p className="text-slate-400 text-base">
-            Whether you have an engineering role, collaborative research idea, or project query, feel free to reach out.
+            Whether you have an engineering role, collaborative research idea, or project query, feel free to reach out directly.
           </p>
         </div>
 
@@ -56,6 +64,29 @@ export default function Contact() {
           {/* Direct Contact Cards (Left 5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             
+            {/* WhatsApp Card (Primary) */}
+            <div className="bg-slate-900/70 border border-emerald-500/40 rounded-2xl p-6 backdrop-blur-sm space-y-3 hover:border-emerald-400 transition-colors shadow-lg shadow-emerald-500/5">
+              <div className="flex items-center justify-between">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                  <MessageSquare className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-mono text-emerald-300 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 font-semibold">
+                  Fastest Response
+                </span>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-wider text-slate-400 font-bold">WhatsApp Direct</p>
+                <a
+                  href={`https://wa.me/${personalInfo.whatsapp.replace(/[^0-9]/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base sm:text-lg font-bold text-white hover:text-emerald-400 transition-colors font-mono block mt-0.5"
+                >
+                  {personalInfo.whatsapp}
+                </a>
+              </div>
+            </div>
+
             {/* Email Card */}
             <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm space-y-3 hover:border-emerald-500/40 transition-colors">
               <div className="flex items-center justify-between">
@@ -107,29 +138,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* WhatsApp Card */}
-            <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm space-y-3 hover:border-emerald-500/40 transition-colors">
-              <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                  <MessageSquare className="w-5 h-5" />
-                </div>
-                <span className="text-xs font-mono text-emerald-400 px-2 py-0.5 rounded-md bg-emerald-500/10">
-                  Instant Message
-                </span>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-wider text-slate-400 font-bold">WhatsApp Direct</p>
-                <a
-                  href={`https://wa.me/${personalInfo.whatsapp.replace(/[^0-9]/g, '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-base sm:text-lg font-bold text-white hover:text-emerald-400 transition-colors font-mono block mt-0.5"
-                >
-                  {personalInfo.whatsapp}
-                </a>
-              </div>
-            </div>
-
             {/* Location Card */}
             <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm space-y-3">
               <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
@@ -145,29 +153,48 @@ export default function Contact() {
 
           </div>
 
-          {/* Interactive Contact Form (Right 7 cols) */}
+          {/* Interactive Direct WhatsApp Message Form (Right 7 cols) */}
           <div className="lg:col-span-7 bg-slate-900/60 border border-slate-800/90 rounded-3xl p-6 sm:p-8 backdrop-blur-sm">
-            <h3 className="text-xl font-bold text-white mb-2">
-              Send a Direct Message
-            </h3>
+            <div className="flex items-center gap-2 mb-2">
+              <MessageSquare className="w-5 h-5 text-emerald-400" />
+              <h3 className="text-xl font-bold text-white">
+                Send a Direct Message via WhatsApp
+              </h3>
+            </div>
             <p className="text-slate-400 text-xs sm:text-sm mb-6">
-              Fill out the form below to send an inquiry or message directly to my inbox.
+              Write your message below. Clicking send will directly open WhatsApp with your message pre-formatted for instant delivery to <strong className="text-slate-200">{personalInfo.whatsapp}</strong>.
             </p>
 
             {submitted ? (
-              <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3 animate-fadeIn">
+              <div className="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-4 animate-fadeIn">
                 <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                <h4 className="text-lg font-bold text-white">Message Prepared!</h4>
-                <p className="text-slate-300 text-sm">
-                  Your email client has opened with your message. If it didn't open automatically, you can also reach me directly at{' '}
-                  <strong className="text-emerald-400">{personalInfo.email}</strong>.
+                <h4 className="text-lg font-bold text-white">WhatsApp Chat Opened!</h4>
+                <p className="text-slate-300 text-sm max-w-md mx-auto">
+                  Your message has been formatted and WhatsApp has opened to deliver it directly to Sumaya.
                 </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-3 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold uppercase tracking-wider"
-                >
-                  Send Another Message
-                </button>
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  {lastWhatsAppUrl && (
+                    <a
+                      href={lastWhatsAppUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Reopen WhatsApp Chat</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  <button
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({ name: '', email: '', subject: '', message: '' });
+                    }}
+                    className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -187,11 +214,10 @@ export default function Contact() {
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                      Your Email *
+                      Your Email (Optional)
                     </label>
                     <input
                       type="email"
-                      required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="john@example.com"
@@ -202,20 +228,20 @@ export default function Contact() {
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                    Subject
+                    Subject / Topic
                   </label>
                   <input
                     type="text"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="Engineering Role / Project Opportunity / Collaboration"
+                    placeholder="Engineering Role / Project Discussion / Collaboration"
                     className="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-800 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                    Message *
+                    Your Message *
                   </label>
                   <textarea
                     rows={5}
@@ -229,10 +255,11 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold text-sm rounded-xl shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold text-sm rounded-xl shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Send Message</span>
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Send Direct Message to WhatsApp</span>
+                  <Send className="w-3.5 h-3.5" />
                 </button>
               </form>
             )}
@@ -245,4 +272,3 @@ export default function Contact() {
     </section>
   );
 }
-
