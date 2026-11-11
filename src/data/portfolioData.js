@@ -269,7 +269,7 @@ export const projectsData = [
     tagline: "Gamified environmental awareness web application connecting citizens through eco-missions and NASA data.",
     image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80",
     techStack: ["PHP", "JavaScript", "HTML5/CSS3", "NASA Earth API", "AQI API"],
-    liveUrl: "https://github.com/sjahanothye/Earth-Guardian",
+    liveUrl: null,
     clientRepo: "https://github.com/sjahanothye/Earth-Guardian",
     brief: "Engaging web app encouraging sustainable living through gamified eco-missions, XP badges, real-time air quality index monitoring, and NASA Earth climate data.",
     description: `Earth Guardians inspires environmental consciousness through playful game mechanics. Users take on real-world eco-challenges (tree planting, plastic reduction, energy saving) to earn XP, level up, and unlock achievement badges.
